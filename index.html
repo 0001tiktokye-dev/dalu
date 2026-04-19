@@ -469,9 +469,11 @@
       }
 
       .gallery-title {
-        background: none;
-        -webkit-text-fill-color: initial;
-        color: #111111;
+        background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #111111 50%, #111111 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
       }
 
       .gallery-item {
