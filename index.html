@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaLu Confecções</title>
+  <meta name="description" content="DaLu Confecções em Guaraí TO. Reparos em geral, ajustes e serviços de costura com atendimento rápido no WhatsApp.">
+  <style>
+    :root {
+      --black: #050505;
+      --white: #fbfbfb;
+      --surface: rgba(255, 255, 255, 0.94);
+      --text: #161616;
+      --muted: #646464;
+      --teal: #1db6a3;
+      --teal-dark: #127d70;
+      --orange: #e69949;
+      --red: #d93535;
+      --indigo: #2f2d77;
+      --line: rgba(22, 22, 22, 0.08);
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.14);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --content-width: 1120px;
+      --page-gutter: 16px;
+      --section-gap: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(90deg, var(--black) 0%, var(--black) 50%, var(--white) 50%, var(--white) 100%);
+      overflow-x: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    section {
+      margin: 0;
+    }
+
+    .page {
+      width: min(var(--content-width), calc(100% - (var(--page-gutter) * 2)));
+      margin: 0 auto;
+      display: grid;
+      gap: var(--section-gap);
+      padding: 8px 0 20px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(10, 10, 10, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      font-size: 0.86rem;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: rgba(255, 255, 255, 0.8);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .hero-card {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: linear-gradient(90deg, var(--black) 0%, var(--black) 50%, var(--white) 50%, var(--white) 100%);
+      padding: 18px 24px 20px;
+      display: grid;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .hero-logo-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-logo-frame {
+      width: min(100%, 720px);
+      display: flex;
+      justify-content: center;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .hero-logo {
+      width: min(100%, 620px);
+      height: auto;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .gallery-shell {
+      position: relative;
+      padding: 0 56px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .gallery-head {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery-title {
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #111111 50%, #111111 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gallery-nav {
+      display: contents;
+    }
+
+    .gallery-button {
+      appearance: none;
+      border: 2px solid #111111;
+      background: #ffffff;
+      color: #111111;
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 1.6rem;
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+    }
+
+    .gallery-button.prev {
+      left: -8px;
+    }
+
+    .gallery-button.next {
+      right: -8px;
+    }
+
+    .gallery-viewport {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 14px;
+      transition: transform 280ms ease;
+      will-change: transform;
+    }
+
+    .gallery-item {
+      flex: 0 0 calc((100% - 28px) / 3);
+      min-width: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      aspect-ratio: 1.15 / 1;
+      object-fit: cover;
+      background: #101010;
+    }
+
+    .hero-info {
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+    }
+
+    .phones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--red);
+      font-size: 0.96rem;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .phone::before {
+      content: "WhatsApp";
+      color: var(--teal-dark);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tagline {
+      font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+      font-size: clamp(2rem, 4.2vw, 3rem);
+      color: var(--orange);
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
+      text-align: center;
+      line-height: 1;
+    }
+
+    .address {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--indigo);
+      text-align: center;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--teal);
+      color: #ffffff;
+      box-shadow: 0 16px 32px rgba(29, 182, 163, 0.26);
+    }
+
+    .button-primary:hover {
+      background: var(--teal-dark);
+    }
+
+    .button-secondary {
+      background: #111111;
+      color: #ffffff;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--surface);
+      padding: 24px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .panel h2,
+    .panel h3 {
+      font-family: Georgia, serif;
+    }
+
+    .panel h2 {
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.05;
+    }
+
+    .panel p,
+    .panel li {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .service {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+      display: grid;
+      gap: 8px;
+    }
+
+    .service h3 {
+      font-size: 1.18rem;
+    }
+
+    .contact-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer {
+      color: rgba(255, 255, 255, 0.8);
+      padding-bottom: 20px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      body {
+        background: linear-gradient(180deg, var(--black) 0%, var(--black) 50%, var(--white) 50%, var(--white) 100%);
+      }
+
+      .hero-card,
+      .service-grid,
+      .contact-box {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-card {
+        padding: 14px 16px 16px;
+        background: linear-gradient(180deg, var(--black) 0%, var(--black) 50%, var(--white) 50%, var(--white) 100%);
+      }
+
+      .hero-logo-frame {
+        width: min(100%, 520px);
+      }
+
+      .gallery-item {
+        flex-basis: calc((100% - 14px) / 2);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page,
+      .footer {
+        width: 94%;
+      }
+
+      .nav {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px 16px;
+      }
+
+      .hero-card {
+        width: 100%;
+        padding: 12px 4% 16px;
+        background: linear-gradient(180deg, var(--black) 0%, var(--black) 42%, var(--white) 42%, var(--white) 100%);
+      }
+
+      .hero-logo-area,
+      .hero-logo-frame,
+      .hero-logo {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .gallery-shell {
+        width: 100%;
+        padding: 0 7%;
+      }
+
+      .gallery-item {
+        flex-basis: calc((100% - 14px) / 2);
+      }
+
+      .hero-info,
+      .phones,
+      .cta-group,
+      .service-grid,
+      .contact-box {
+        width: 100%;
+      }
+
+      .phones,
+      .cta-group,
+      .contact-box {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .phone,
+      .button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .panel {
+        width: 100%;
+        padding: 20px 5%;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page,
+      .footer {
+        width: min(var(--content-width), calc(100% - 20px));
+      }
+
+      .nav {
+        padding: 12px 14px;
+      }
+
+      .brand {
+        font-size: 0.78rem;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .gallery-shell {
+        padding: 0 18px;
+      }
+
+      .gallery-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.35rem;
+        top: calc(50% + 12px);
+      }
+
+      .gallery-button.prev {
+        left: -2px;
+      }
+
+      .gallery-button.next {
+        right: -2px;
+      }
+
+      .gallery-item {
+        flex-basis: 100%;
+      }
+
+      .phones,
+      .cta-group {
+        width: 100%;
+      }
+
+      .phone,
+      .button {
+        width: 100%;
+      }
+
+      .panel {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="brand">DALU CONFECÇÕES</div>
+      <div class="nav-links">
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <section class="hero-card reveal">
+        <div class="hero-logo-area">
+          <div class="hero-logo-frame">
+            <img class="hero-logo" src="logo-atual.png" alt="Logo da DaLu Confecções">
+          </div>
+        </div>
+
+        <div class="gallery-shell">
+          <div class="gallery-head">
+            <h2 class="gallery-title">Alguns serviços já feitos</h2>
+          </div>
+          <div class="gallery-nav">
+            <button class="gallery-button prev" id="galleryPrev" type="button" aria-label="Voltar fotos">&#8592;</button>
+            <button class="gallery-button next" id="galleryNext" type="button" aria-label="Avançar fotos">&#8594;</button>
+          </div>
+          <div class="gallery-viewport">
+            <div class="gallery-track" id="galleryTrack">
+              <div class="gallery-item"><img src="servico-1.jpeg" alt="Serviço de costura infantil azul"></div>
+              <div class="gallery-item"><img src="servico-2.jpeg" alt="Vestido azul confeccionado"></div>
+              <div class="gallery-item"><img src="servico-3.jpeg" alt="Conjunto infantil personalizado"></div>
+              <div class="gallery-item"><video src="servico-video-1.mp4" controls muted playsinline preload="metadata"></video></div>
+              <div class="gallery-item"><img src="servico-4.jpeg" alt="Bordado em uniforme"></div>
+              <div class="gallery-item"><img src="servico-5.jpeg" alt="Bonés bordados"></div>
+              <div class="gallery-item"><img src="servico-6.jpeg" alt="Vestido xadrez confeccionado"></div>
+              <div class="gallery-item"><img src="servico-7.jpeg" alt="Uniforme escolar confeccionado"></div>
+              <div class="gallery-item"><img src="servico-8.jpeg" alt="Vestido azul de festa confeccionado"></div>
+              <div class="gallery-item"><img src="servico-9.jpeg" alt="Modelo de blusa social feminina"></div>
+              <div class="gallery-item"><img src="servico-10.jpeg" alt="Vestido xadrez preto e branco"></div>
+              <div class="gallery-item"><img src="servico-11.jpeg" alt="Vestido infantil rosa confeccionado"></div>
+              <div class="gallery-item"><img src="servico-12.jpeg" alt="Vestido verde de festa"></div>
+              <div class="gallery-item"><img src="servico-13.jpeg" alt="Vestido infantil amarelo e azul"></div>
+              <div class="gallery-item"><img src="servico-14.jpeg" alt="Fantasia infantil vermelha"></div>
+              <div class="gallery-item"><img src="servico-15.jpeg" alt="Roupa infantil temática melancia"></div>
+              <div class="gallery-item"><img src="servico-16.jpeg" alt="Vestidos longos de festa"></div>
+              <div class="gallery-item"><img src="servico-17.jpeg" alt="Vestido azul de festa pronto"></div>
+              <div class="gallery-item"><img src="servico-18.jpeg" alt="Fantasia infantil colorida pronta"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-info">
+          <div class="phones">
+            <a class="phone" href="https://wa.me/5563999939190">63 99993-9190</a>
+            <a class="phone" href="https://wa.me/5563984231687">63 98423-1687</a>
+          </div>
+          <div class="tagline">Reparos em Geral</div>
+          <div class="address">Rua Piauí, 1155 - Guaraí TO</div>
+          <div class="cta-group">
+            <a class="button button-primary" href="https://wa.me/5563999939190">Pedir orçamento</a>
+            <a class="button button-secondary" href="https://wa.me/5563984231687">Falar agora</a>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main class="content">
+      <section class="panel reveal" id="servicos">
+        <p class="eyebrow">Serviços</p>
+        <h2>Trabalho de costura pensado para resolver o que você precisa no dia a dia.</h2>
+        <div class="service-grid">
+          <article class="service">
+            <h3>Ajustes de roupas</h3>
+            <p>Barras, mangas, cinturas e alterações para melhorar o caimento da peça.</p>
+          </article>
+          <article class="service">
+            <h3>Consertos e reparos</h3>
+            <p>Troca de zíper, costuras abertas, reforços e pequenos reparos em geral.</p>
+          </article>
+          <article class="service">
+            <h3>Atendimento direto</h3>
+            <p>Contato simples pelo WhatsApp para tirar dúvidas, consultar preços e combinar entrega.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel reveal" id="sobre">
+        <p class="eyebrow">Sobre</p>
+        <h2>DaLu Confecções une cuidado, praticidade e atendimento local em Guaraí.</h2>
+        <p>
+          Cada peça apresentada na galeria mostra um pouco do trabalho feito com cuidado, acabamento e atenção aos detalhes.
+        </p>
+        <p>
+          A proposta do site é apresentar os serviços de forma clara, valorizar os trabalhos já concluídos e facilitar o contato direto com quem quer ajustar, consertar ou confeccionar peças.
+        </p>
+      </section>
+
+      <section class="panel reveal" id="contato">
+        <p class="eyebrow">Contato</p>
+        <div class="contact-box">
+          <div>
+            <h2>Fale com a DaLu Confecções</h2>
+            <p>Atendimento para ajustes, consertos, reparos e orçamentos.</p>
+          </div>
+          <div class="cta-group">
+            <a class="button button-primary" href="https://wa.me/5563999939190">63 99993-9190</a>
+            <a class="button button-secondary" href="https://wa.me/5563984231687">63 98423-1687</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2026 DaLu Confecções. Rua Piauí, 1155 - Guaraí TO.</p>
+    </footer>
+  </div>
+
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.18 });
+
+    revealItems.forEach((item) => {
+      observer.observe(item);
+    });
+
+    const galleryTrack = document.getElementById("galleryTrack");
+    const galleryPrev = document.getElementById("galleryPrev");
+    const galleryNext = document.getElementById("galleryNext");
+    const galleryItems = Array.from(galleryTrack.children);
+    let galleryIndex = 0;
+
+    const getVisibleSlides = () => {
+      if (window.innerWidth <= 620) {
+        return 1;
+      }
+      if (window.innerWidth <= 920) {
+        return 2;
+      }
+      return 3;
+    };
+
+    const updateGallery = () => {
+      const visibleSlides = getVisibleSlides();
+      const maxIndex = Math.max(0, galleryItems.length - visibleSlides);
+      galleryIndex = Math.min(galleryIndex, maxIndex);
+
+      const firstItem = galleryItems[0];
+      const itemWidth = firstItem.getBoundingClientRect().width;
+      const gap = 14;
+      const offset = galleryIndex * (itemWidth + gap);
+
+      galleryTrack.style.transform = `translateX(-${offset}px)`;
+      galleryPrev.disabled = galleryIndex === 0;
+      galleryNext.disabled = galleryIndex >= maxIndex;
+      galleryPrev.style.opacity = galleryIndex === 0 ? "0.45" : "1";
+      galleryNext.style.opacity = galleryIndex >= maxIndex ? "0.45" : "1";
+    };
+
+    galleryPrev.addEventListener("click", () => {
+      galleryIndex = Math.max(0, galleryIndex - 1);
+      updateGallery();
+    });
+
+    galleryNext.addEventListener("click", () => {
+      const visibleSlides = getVisibleSlides();
+      const maxIndex = Math.max(0, galleryItems.length - visibleSlides);
+      galleryIndex = Math.min(maxIndex, galleryIndex + 1);
+      updateGallery();
+    });
+
+    window.addEventListener("resize", updateGallery);
+    updateGallery();
+  </script>
+</body>
+</html>
