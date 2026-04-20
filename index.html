@@ -438,20 +438,27 @@
       justify-self: center;
       padding: 14px 20px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(0, 0, 0, 0.03);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-      font-size: 0.96rem;
-      font-weight: 600;
-      color: #394355;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 248, 252, 0.98) 100%);
+      border: 1px solid rgba(22, 34, 46, 0.08);
+      box-shadow:
+        0 24px 56px rgba(13, 24, 34, 0.18),
+        0 10px 22px rgba(13, 24, 34, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #263241;
       text-align: center;
       margin-top: 2px;
       transition: all 0.3s ease-in-out;
+      letter-spacing: -0.01em;
     }
 
     .address:hover {
       transform: translateY(-5px);
-      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.1);
+      box-shadow:
+        0 30px 68px rgba(13, 24, 34, 0.22),
+        0 14px 28px rgba(13, 24, 34, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.88);
     }
 
     .cta-group {
@@ -1147,7 +1154,7 @@
 
         <div class="hero-info">
           <div class="tagline">Reparos em Geral</div>
-          <div class="address">Rua Piauí, 1155 - Guaraí TO</div>
+          <a class="address" href="https://maps.app.goo.gl/bMJYxDnJKSzvkprS7" target="_blank" rel="noopener noreferrer">Rua Piauí, 1155 - Guaraí TO</a>
           <div class="cta-group">
             <a class="button button-primary" href="https://wa.me/5563999939190">Pedir orçamento</a>
           </div>
